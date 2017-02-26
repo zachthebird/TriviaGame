@@ -46,36 +46,43 @@ $(document).ready(function(){
 	//define the checkAnswer function//
 
 	//display current question, choices, and timer//
-	function questionTimer(){
-		timer = setInterval(thirtySeconds, 1000);
-		function thirtySeconds(){
-			if(time == 0){
-				clearInterval(timer);
-				noAnswer();
-			} else if (time > 0){
-				time--;
-				$(document).on('click', '.btn', function(event){
-					givenAnswer = $(this).text();
-					checkAnswer();
-					console.log(givenAnswer);
-				} )
-			}
-			$('#timer').html(time);
-			$('#questions').html('<p>'+questions[currentQuestion]+'</p>');
-			$('#choices').html('<p class="btn"> A. '+ answers[currentQuestion][0]+'</p><br>' +'<p class="btn"> B. '+ answers[currentQuestion][1]+'</p><br>' +'<p class="btn"> C. '+ answers[currentQuestion][2]+'</p><br>' +'<p class="btn"> D. '+ answers[currentQuestion][3]+'</p><br>'  );
+	$(document).on('click', '.btn', function(event){
+		givenAnswer = $(this).text();
+		givenAnswer = givenAnswer.slice(4);
+		checkAnswer();
+		console.log(givenAnswer);
+		console.log(rtAnswer[currentQuestion]);
+		currentQuestion ++;
+	} )
+
+	var timer = setInterval(thirtySeconds, 1000);
+
+	function thirtySeconds(){
+		if(time == 0){
+			clearInterval(timer);
+			noAnswer();
+			currentQuestion++;
+		} else if (time > 0){
+			time--;
+
 		}
+		$('#timer').html(time);
+		$('#questions').html('<p>'+questions[currentQuestion]+'</p>');
+		$('#choices').html('<p class="btn"> A. '+ answers[currentQuestion][0]+'</p><br>' +'<p class="btn"> B. '+ answers[currentQuestion][1]+'</p><br>' +'<p class="btn"> C. '+ answers[currentQuestion][2]+'</p><br>' +'<p class="btn"> D. '+ answers[currentQuestion][3]+'</p><br>');
 	}
-	
-	questionTimer();
+	if(currentQuestion == 10){
+		console.log('game over');
+	}
 
 	function checkAnswer(){
-		if (givenAnswer = rtAnswer[currentQuestion]){
+		if (givenAnswer == rtAnswer[currentQuestion]){
 			correctAnswer();
+			console.log('correct!')
 		}
-		else if (givenAnswer != rtAnswer[currentQuestion]){
+		else if (givenAnswer !== rtAnswer[currentQuestion]){
 			wrongAnswer();
+			console.log('wrong!')
 		}
-		currentQuestion ++;
 	}
 
 	function correctAnswer(selection) {
@@ -89,9 +96,7 @@ $(document).ready(function(){
 	function noAnswer() {
 		wrong ++;
 	} ;
-	$('p').on('hover', function(){
-		toggleClass('focus');
-	});
+
 
 });
 

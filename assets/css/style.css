@@ -7,3 +7,13 @@
 #timer{
 	margin-top: 20px;
 }
+.btn:hover{
+	border-style: solid;
+	border-color: darkblue;
+	background-color: lightblue;
+}
+.btn:focus{
+	border-style: solid;
+	border-color: darkblue;
+	background-color: lightblue;
+}
