@@ -3,6 +3,7 @@
 	height: auto;
 	width:  auto;
 	background-color: green;
+	margin: 0;
 }
 #timer{
 	margin-top: 20px;
@@ -16,4 +17,7 @@
 	border-style: solid;
 	border-color: darkblue;
 	background-color: lightblue;
+}
+#questions{
+	font-size: 30px;
 }
